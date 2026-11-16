@@ -1,0 +1,8 @@
+local
+.DS_Store
+
+# Created when students run the Terraform labs
+.terraform/
+*.tfstate
+*.tfstate.*
+build/

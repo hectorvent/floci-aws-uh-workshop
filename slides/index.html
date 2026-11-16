@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Give Your Agent a Cloud It Can Break</title>
+  <link rel="stylesheet" href="vendor/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="vendor/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal.js/dist/theme/black.css">
+  <link rel="stylesheet" href="vendor/fonts.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="icon" href="assets/floci-logo.svg" type="image/svg+xml">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="floci-logo" viewBox="0 0 531.25 156.71">
+    <g style="fill:var(--logo-text)"><path d="M305.44,141.35h-15.94V39.04h-17.08c-13.18,0-16.75,7.81-16.59,17.4v8.95h17.4v13.34h-17.4v62.62h-15.94v-62.62h-14.64v-13.34h14.64v-7.16c0-20.66,8.95-34.16,29.6-34.16h35.95v117.28Z"/><path d="M324.31,103.29c0-24.07,18.22-39.85,39.85-39.85s40.01,15.78,40.01,39.85-18.38,40.01-40.01,40.01-39.85-15.94-39.85-40.01ZM388.24,103.29c0-14.64-11.06-24.89-24.07-24.89s-23.91,10.25-23.91,24.89,10.9,25.05,23.91,25.05,24.07-10.25,24.07-25.05Z"/><path d="M418,103.29c0-24.07,19.03-39.85,40.99-39.85,12.36,0,22.93,5.04,29.6,13.01l-10.57,9.92c-4.39-4.88-11.06-7.97-18.71-7.97-14.15,0-25.38,10.41-25.38,24.89s11.22,25.05,25.38,25.05c7.65,0,14.31-3.09,18.71-7.97l10.57,9.92c-6.67,7.97-17.24,13.01-29.6,13.01-21.96,0-40.99-15.94-40.99-40.01Z"/><path d="M502.91,37.74c0-5.86,5.04-10.25,10.9-10.25s10.9,4.39,10.9,10.25-4.88,10.25-10.9,10.25-10.9-4.39-10.9-10.25ZM505.84,141.35v-75.96h15.94v75.96h-15.94Z"/></g>
+    <g style="fill:var(--logo-cloud)"><path d="M44.46,52.16l-1.44,9.05c-.1.64-35.57,8.08-30.51,43.05,2.04,14.08,14.69,31.06,31.94,31.22l84.34.78c3.64.03,7.49.5,9.97,2.81,1.69,1.57,1.95,6.1-.29,9.22l-83.49.43c-22.68.12-43.45-11.19-51.76-32.9-8.64-22.56.61-49.48,22.58-59.54,5.11-2.34,7.7-4,8.39-9.37l10.28,5.24h-.01Z"/><path d="M44.46,52.16l-10.28-5.24c1.94-15.09,10.61-28.25,23.15-36.38C74.85-.82,94.57-3.69,115.01,5.35c14.93,6.6,26.96,21.97,32.12,39.33,26.07,3.63,46.19,26.18,40.75,53.8-3.06.86-9.18-1.15-11.34-3.72,1.28-12.11-3.1-22.27-10.75-29.43-8.19-7.67-17.88-9.28-30.09-8.04-.09-25.91-19.81-43.97-43.82-45.33-22.91-1.29-43.59,16.13-47.42,40.2h0Z"/></g>
+    <g style="fill:var(--logo-dot)"><ellipse cx="173.57" cy="127.13" rx="20.36" ry="20.4"/><ellipse cx="513.02" cy="37.71" rx="13.22" ry="13.25"/></g>
+  </symbol>
+</svg>
+<div class="deck-chrome" aria-hidden="true">
+  <svg class="floci-mark" viewBox="0 0 531.25 156.71"><use href="#floci-logo"/></svg>
+  <span class="chrome-sep"></span>
+  <img src="assets/uh-logo.svg" alt="">
+</div>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================ INTRO TALK (0-15) ============================ -->
+
+<section id="title" class="title-slide">
+  <div class="brand-row">
+    <svg class="floci-mark" viewBox="0 0 531.25 156.71" role="img" aria-label="Floci"><use href="#floci-logo"/></svg>
+    <span class="x">×</span>
+    <img class="uh-logo" src="assets/uh-logo.svg" alt="University of Houston">
+  </div>
+  <p class="kicker">Hands-on workshop at the Sugar Land campus</p>
+  <h1>Give Your Agent a Cloud<br>It Can <span class="accent">Break</span></h1>
+  <p class="byline">Hector Ventura · creator of Floci</p>
+  <p class="tagline">floci.io · <em>Any Cloud. Locally.</em></p>
+  <aside class="notes">
+    Welcome. Two hours: about 15 minutes of talk, then labs, then Q&amp;A.
+    Point at the repo QR on the next slide so people can start cloning while we talk.
+  </aside>
+</section>
+
+<section id="bio">
+  <div class="bio-row">
+    <img class="bio-photo" src="assets/hector-profile.png" alt="Hector Ventura">
+    <div class="bio">
+      <h2>Hector Ventura</h2>
+      <p class="bio-role">Creator of Floci</p>
+      <p class="bio-line">Floci puts AWS, Azure, GCP and OCI on your laptop. Free, open source, no account needed.</p>
+      <p class="bio-meta">Texas<span class="sep">/</span>hectorvent.dev<span class="sep">/</span>@hectorvent</p>
+      <p class="oss">Open-source contributions<b>Vert.x<span class="sep">/</span>Quarkus<span class="sep">/</span>Debezium</b></p>
+    </div>
+  </div>
+  <aside class="notes">
+    About 20 seconds. Who you are and why Floci, in one sentence, then straight to the hands-up questions.
+  </aside>
+</section>
+
+<section id="hands">
+  <h2>Hands up</h2>
+  <ul class="big-list">
+    <li class="fragment">Who has a cloud account?</li>
+    <li class="fragment">Who has used a coding agent?</li>
+    <li class="fragment">Who has Docker running <span class="accent">right now</span>?</li>
+  </ul>
+  <div class="qr-corner">
+    <div class="qr" data-qr="workshop"></div>
+    <span class="qr-label" data-qr-label="workshop"></span>
+  </div>
+  <aside class="notes">
+    Count the Docker hands. If it's under half, send helpers around now, before Lab 0.
+    Repo QR in the corner: everything in the labs is in its README.
+  </aside>
+</section>
+
+<section id="meet-alex" class="story">
+  <p class="chapter"><time>Monday night</time> Meet Alex</p>
+  <h2>Capstone due Friday. Four days left.</h2>
+  <p class="night-lede">Junior in computer science at UH. The project: a file-upload pipeline on AWS, with a Postgres database (RDS) and a Kubernetes cluster (EKS).</p>
+  <ol class="night">
+    <li class="fragment"><time>10:30 PM</time><span><code>terraform apply</code>. The bucket and the queue are ready in seconds.</span></li>
+    <li class="fragment"><time>10:31 PM</time><span>The database says <em>Still creating…</em> On AWS that's about <b>10 minutes</b>.</span></li>
+    <li class="fragment"><time>10:43 PM</time><span>The cluster is still creating. EKS takes <b>9 to 15 minutes</b>.</span></li>
+    <li class="fragment"><time>10:47 PM</time><span><code>AccessDenied: iam:PassRole</code>. One-line fix. Apply again. Wait again.</span></li>
+    <li class="fragment"><time>11:55 PM</time><span>Attempt four. Each one is another <b>15 minutes</b> watching a progress bar.</span></li>
+    <li class="fragment end"><time>1:40 AM</time><span>Too tired. Pastes <b>real AWS keys</b> into a coding agent: <em>“Fix it until it works.”</em> Goes to sleep.</span></li>
+  </ol>
+  <p class="fragment night-callout">One attempt on AWS: <b class="aws-time">~15 min</b>. The same stack on Floci: <b>~15 s</b>.</p>
+  <aside class="notes">
+    About 90 seconds. Tell it like a story, one click per line. Ask: "Who has stared at 'Still creating…' at midnight?"
+    AWS times are typical us-east-1 numbers (same as the floci-demo-qa deck: RDS ~10 min; EKS control plane 9–15 min
+    from the AWS announcement and a Terraform benchmark). They vary by region and configuration.
+    Floci time measured on 2.5.0 (2026-11-16), the whole stack created in parallel like Terraform does:
+    S3 0.5 s, SQS 0.5 s, Lambda + first call 1.6 s, RDS PostgreSQL 3.4 s, EKS 14.7 s. Total 14.8 s.
+    Transition: "So at 1:40 AM Alex hands the keys to the agent. Here's what the agent did while Alex slept."
+  </aside>
+</section>
+
+<section id="twelve">
+  <p class="chapter"><time>2:13 AM</time> Alex is asleep</p>
+  <h2>Twelve attempts</h2>
+  <div class="agent-run">
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>alex@dorm: ~/capstone · real AWS account</span></div>
+      <pre class="agent-log" id="agent-log"></pre>
+    </div>
+    <div class="counters">
+      <div class="counter"><span class="num" id="c-attempts">0</span><span class="lbl">attempts</span></div>
+      <div class="counter"><span class="num" id="c-minutes">0</span><span class="lbl">minutes waited</span></div>
+      <div class="counter"><span class="num" id="c-dollars">$0</span><span class="lbl">spent</span></div>
+    </div>
+  </div>
+  <p class="illustrative">Illustrative run of an EKS + RDS stack against a real account</p>
+  <p class="fragment punch">The agent didn't give up. That was the problem.</p>
+  <aside class="notes">
+    The log plays when the slide opens (press R to replay).
+    Narrate it: "While Alex sleeps, the agent does exactly what it was told." Apply, fail, read, edit, apply again.
+    Point at attempt 3 (it widened an IAM policy on its own) and attempt 5 (a destroy, on a real account, at 3 AM).
+    Numbers are illustrative: an EKS + RDS stack, about 12 minutes per apply.
+  </aside>
+</section>
+
+<section id="bill" class="story">
+  <p class="chapter"><time>Wednesday, 9:02 AM</time></p>
+  <div class="email fragment">
+    <div class="email-head">
+      <span class="from">AWS Billing</span>
+      <span class="subj">Your AWS Budget alert: actual spend exceeded $0.00</span>
+    </div>
+    <div class="email-body">
+      <p>Month-to-date charges</p>
+      <p class="amount">$187.60</p>
+      <p class="small">EKS cluster · 3 nodes · NAT gateway · RDS instance: <b>running since Tuesday, 4:09 AM</b></p>
+    </div>
+  </div>
+  <p class="fragment beat">The agent won at 4:09 AM. Nobody told it to clean up.</p>
+  <p class="fragment punch">Would you hand it your keys?</p>
+  <aside class="notes">
+    Pause after the amount. Let it land.
+    The night of retries cost about $10. The real bill came from what was left running for two days.
+    $187.60 is a made-up but realistic number for that stack (EKS control plane + 3 m5.xlarge nodes + NAT + Multi-AZ RDS, ~53 hours, about $3.40/hour).
+    Transition: "So let's give Alex what they actually needed." Next slide.
+  </aside>
+</section>
+
+<section id="problem">
+  <p class="chapter">What Alex actually needed</p>
+  <h2>The problem, and how Floci solves it</h2>
+  <table class="ps-table">
+    <thead><tr><th>The problem</th><th aria-hidden="true"></th><th>With Floci</th></tr></thead>
+    <tbody>
+      <tr class="fragment"><td>Every failed <code>apply</code> costs money</td><td class="arrow" aria-hidden="true">→</td><td>Nothing to pay. <b>Failure is free</b></td></tr>
+      <tr class="fragment"><td>Live keys give an agent a real blast radius</td><td class="arrow" aria-hidden="true">→</td><td>Fake keys that <b>can't reach AWS</b></td></tr>
+      <tr class="fragment"><td>Real resources take minutes</td><td class="arrow" aria-hidden="true">→</td><td>Ready in <b>seconds</b></td></tr>
+      <tr class="fragment"><td>Leftovers keep billing you</td><td class="arrow" aria-hidden="true">→</td><td><code>floci aws reset</code>: <b>all gone</b></td></tr>
+      <tr class="fragment"><td>Mocks don't fail like the real cloud</td><td class="arrow" aria-hidden="true">→</td><td><b>Real errors</b> for Terraform, CLI, SDKs</td></tr>
+      <tr class="fragment"><td>Parallel agents collide on one account</td><td class="arrow" aria-hidden="true">→</td><td><b>Isolated accounts</b> per agent</td></tr>
+      <tr class="fragment"><td>You need a credit card to start</td><td class="arrow" aria-hidden="true">→</td><td>Laptop, offline, <b>free forever</b></td></tr>
+    </tbody>
+  </table>
+  <aside class="notes">
+    One row at a time. Spend the most time on rows 2 and 5: blast radius, and real errors versus mocks.
+    Tie rows back to Alex: row 1 is the $10 night, row 2 is the IAM policy the agent widened, row 4 is the $187.60 bill.
+  </aside>
+</section>
+
+<section id="agent-loop">
+  <h2>How a coding agent works</h2>
+  <div class="two-col">
+    <svg class="loop" viewBox="0 0 360 360" role="img" aria-label="Plan, act, observe, repeat">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+      <circle cx="180" cy="180" r="120" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="2"/>
+      <path d="M 250 83 A 120 120 0 0 1 285 240" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arr)"/>
+      <path d="M 245 280 A 120 120 0 0 1 115 280" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arr)"/>
+      <path d="M 75 240 A 120 120 0 0 1 110 83" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arr)"/>
+      <g class="node"><rect x="130" y="35" width="100" height="44" rx="10"/><text x="180" y="63">plan</text></g>
+      <g class="node"><rect x="255" y="245" width="100" height="44" rx="10"/><text x="305" y="273">act</text></g>
+      <g class="node hot"><rect x="5" y="245" width="110" height="44" rx="10"/><text x="60" y="273">observe</text></g>
+      <text class="center" x="180" y="186">repeat</text>
+    </svg>
+    <ul>
+      <li class="fragment">The loop: plan, act, <b>observe</b>, repeat</li>
+      <li class="fragment">An agent is only as good as the <b>errors it gets back</b></li>
+      <li class="fragment">Mocks return what you told them to. A real cloud returns <b>what actually happened</b></li>
+      <li class="fragment">Today: a cloud that behaves like the real one and <b>costs nothing to break</b></li>
+    </ul>
+  </div>
+  <aside class="notes">
+    "Observe" is highlighted on purpose. If the error the agent observes is fake, the fix it learns is fake.
+  </aside>
+</section>
+
+<section id="build">
+  <p class="chapter">Today, you are Alex</p>
+  <h2>What we'll build: Alex's capstone</h2>
+  <svg class="pipeline" viewBox="0 0 1100 260" role="img" aria-label="Upload to S3, event to SQS, Lambda processes it, logs to CloudWatch">
+    <defs>
+      <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+      </marker>
+    </defs>
+    <g class="svc"><rect x="10" y="70" width="150" height="90" rx="14"/><text x="85" y="112">you</text><text class="sub" x="85" y="138">aws s3 cp</text></g>
+    <g class="svc s3"><rect x="230" y="70" width="190" height="90" rx="14"/><text x="325" y="112">S3</text><text class="sub" x="325" y="138">bucket "uploads"</text></g>
+    <g class="svc sqs"><rect x="490" y="70" width="190" height="90" rx="14"/><text x="585" y="112">SQS</text><text class="sub" x="585" y="138">"uploads-events"</text></g>
+    <g class="svc lambda"><rect x="750" y="70" width="190" height="90" rx="14"/><text x="845" y="112">Lambda</text><text class="sub" x="845" y="138">"process-upload"</text></g>
+    <g class="svc logs"><rect x="960" y="200" width="130" height="54" rx="12"/><text class="sub" x="1025" y="233">Logs</text></g>
+    <line x1="160" y1="115" x2="225" y2="115" stroke="currentColor" stroke-width="3" marker-end="url(#arr2)"/>
+    <line x1="420" y1="115" x2="485" y2="115" stroke="currentColor" stroke-width="3" marker-end="url(#arr2)"/>
+    <line x1="680" y1="115" x2="745" y2="115" stroke="currentColor" stroke-width="3" marker-end="url(#arr2)"/>
+    <path d="M 940 140 Q 1000 150 1015 196" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arr2)"/>
+    <text class="edge" x="452" y="98">event</text>
+    <text class="edge" x="712" y="98">trigger</text>
+    <rect class="iam" x="740" y="40" width="210" height="130" rx="18"/>
+    <text class="iam-label" x="845" y="32">IAM role</text>
+  </svg>
+  <table class="svc-table">
+    <tr><td><b>S3</b></td><td>stores files</td><td><b>Lambda</b></td><td>runs code on an event</td></tr>
+    <tr><td><b>SQS</b></td><td>carries messages</td><td><b>IAM</b></td><td>decides who can do what</td></tr>
+    <tr><td colspan="4"><b>Terraform</b> describes all of it as code</td></tr>
+  </table>
+  <aside class="notes">
+    Keep this to one sentence per box. We will see every box twice: by hand in Lab 1, as code in Lab 2.
+    "Same capstone Alex was building. Same AWS services. This time, nobody gets a bill."
+    Each lab is a chapter of Alex's week: watch the chapter label on the lab slides.
+  </aside>
+</section>
+
+<!-- ============================ LAB 0 (15-25) ============================ -->
+
+<section class="lab-title" data-background-color="#0F1520">
+  <p class="clock">15 – 25 min</p>
+  <h1>Lab 0</h1>
+  <h2>Setup</h2>
+  <p class="chapter-line">Chapter 1 · <b>A cloud that can't send a bill</b></p>
+  <p class="beat">Wednesday night. Alex starts over, on a laptop, with no AWS account.</p>
+</section>
+
+<section>
+  <h3>Start Floci with the <code>floci</code> CLI</h3>
+  <pre><code class="language-bash" data-trim data-line-numbers="1|2|3">
+floci aws start      # pulls, starts, waits until ready
+floci aws status     # running? healthy? which version?
+floci aws doctor     # something wrong? it tells you what
+  </code></pre>
+  <h3 class="fragment" data-fragment-index="2">Point the AWS CLI at it</h3>
+  <pre class="fragment" data-fragment-index="2"><code class="language-bash" data-trim>
+eval "$(floci aws env)"
+# AWS_ENDPOINT_URL=http://localhost.floci.io:4566
+# AWS_ACCESS_KEY_ID=test  AWS_SECRET_ACCESS_KEY=test
+  </code></pre>
+  <p class="small install">No CLI yet?<br>macOS / Linux: <code>brew install floci-io/floci/floci</code><br>Windows: <code>iwr https://floci.io/install.ps1 | iex</code></p>
+  <aside class="notes">
+    floci aws start mounts the Docker socket for you; that's how Floci runs Lambda functions in containers.
+    floci-cli only manages the emulator. The resources are still created with the normal tools: aws, Terraform, SDKs.
+    localhost.floci.io resolves to 127.0.0.1 through public DNS. If the room has no internet:
+    eval "$(floci aws env --host localhost)". Last resort without the CLI: source lab0-setup/env.sh.
+    New terminal = run the eval line again. Windows: PowerShell uses floci aws env --shell powershell, or use WSL 2.
+  </aside>
+</section>
+
+<section>
+  <h2>These credentials are fake</h2>
+  <p class="huge"><code>test</code> / <code>test</code></p>
+  <p class="fragment punch">If this leaks, nothing happens.</p>
+  <p class="fragment small">Remember Alex's real keys in the agent at 1:40 AM? Not tonight.</p>
+  <aside class="notes">Leave this up while people install.</aside>
+</section>
+
+<section class="checkpoint">
+  <p class="badge">✅ Checkpoint</p>
+  <pre><code class="language-bash" data-trim>
+$ aws sts get-caller-identity
+{
+    "UserId": "000000000000",
+    "Account": "000000000000",
+    "Arn": "arn:aws:iam::000000000000:root"
+}
+  </code></pre>
+  <p class="wait">Wait for most of the room</p>
+  <aside class="notes">Story beat: "Alex now has a cloud. It cost nothing, and it can't cost anything."</aside>
+</section>
+
+<!-- ============================ LAB 1 (25-35) ============================ -->
+
+<section class="lab-title" data-background-color="#0F1520">
+  <p class="clock">25 – 35 min</p>
+  <h1>Lab 1</h1>
+  <h2>Your first cloud resources</h2>
+  <p class="chapter-line">Chapter 2 · <b>The zero-dollar bucket</b></p>
+  <p class="beat">Alex creates the first piece of the capstone by hand, to see it work.</p>
+</section>
+
+<section>
+  <pre><code class="language-bash" data-trim data-line-numbers="1|3-5|7-8">
+cd lab1-cli
+
+aws s3 mb s3://uploads
+aws s3 cp hello.txt s3://uploads/
+aws s3 ls s3://uploads/
+
+aws sqs create-queue --queue-name uploads-events
+aws sqs list-queues
+  </code></pre>
+  <p class="fragment small">Fast finishers: <code>aws sqs send-message</code> then <code>aws sqs receive-message</code></p>
+</section>
+
+<section class="checkpoint">
+  <p class="badge">✅ Checkpoint</p>
+  <pre><code class="language-bash" data-trim>
+$ aws s3 ls s3://uploads/
+2026-11-04 10:31:07         14 hello.txt
+  </code></pre>
+  <div class="fragment callout warn">
+    <p><b>Before Lab 2:</b> <code>floci aws reset -y</code></p>
+    <p class="small">Lab 2 creates the same names. Terraform says <code>BucketAlreadyExists</code>, like real AWS would.</p>
+  </div>
+  <aside class="notes">
+    That collision is a nice first "real error". If someone forgets to reset, show them the Terraform error, don't just fix it.
+  </aside>
+</section>
+
+<!-- ============================ LAB 2 (35-50) ============================ -->
+
+<section class="lab-title" data-background-color="#0F1520">
+  <p class="clock">35 – 50 min</p>
+  <h1>Lab 2</h1>
+  <h2>Infrastructure as code</h2>
+  <p class="chapter-line">Chapter 3 · <b>Write it once, rebuild it anytime</b></p>
+  <p class="beat">Thursday. Alex turns the whole pipeline into Terraform, so it can be rebuilt from nothing.</p>
+</section>
+
+<section id="tf-map">
+  <h3>What's in <code>lab2-terraform/main.tf</code></h3>
+  <table class="tf-map">
+    <thead><tr><th>In the diagram</th><th>Terraform resource</th></tr></thead>
+    <tbody>
+      <tr><td><span class="svc-dot s3"></span>S3 bucket <code>uploads</code></td><td><code>aws_s3_bucket</code></td></tr>
+      <tr><td><span class="svc-dot sqs"></span>SQS queue <code>uploads-events</code></td><td><code>aws_sqs_queue</code> <span class="plus">+</span> <code>aws_sqs_queue_policy</code> <span class="why">lets S3 send to it</span></td></tr>
+      <tr><td><span class="svc-dot edge"></span>S3 → SQS <em>event</em></td><td><code>aws_s3_bucket_notification</code></td></tr>
+      <tr><td><span class="svc-dot iam"></span>IAM role</td><td><code>aws_iam_role</code> <span class="plus">+</span> <code>aws_iam_role_policy</code> <span class="why">read the queue, write logs</span></td></tr>
+      <tr><td><span class="svc-dot lambda"></span>Lambda <code>process-upload</code></td><td><code>aws_lambda_function</code> <span class="why">runs <code>src/handler.py</code></span></td></tr>
+      <tr><td><span class="svc-dot edge"></span>SQS → Lambda <em>trigger</em></td><td><code>aws_lambda_event_source_mapping</code></td></tr>
+    </tbody>
+  </table>
+  <p class="small">8 resources. Plain AWS Terraform: nothing in it is Floci-specific except the provider block, next.</p>
+  <aside class="notes">
+    Point back at the "What we'll build" diagram: every box and every arrow is one or two resources here.
+    The two arrows are the interesting ones: the bucket notification and the event source mapping are the glue.
+    Have them open main.tf now; the sections in the file follow this table top to bottom.
+  </aside>
+</section>
+
+<section id="provider" class="code-tall">
+  <h3>The only lines that make this local</h3>
+  <pre><code class="language-ini" data-trim data-line-numbers="1-18|3-4|5-8|10-17">
+provider "aws" {
+  region                      = "us-east-1"
+  access_key                  = "test"
+  secret_key                  = "test"
+  skip_credentials_validation = true
+  skip_requesting_account_id  = true
+  skip_metadata_api_check     = true
+  s3_use_path_style           = true
+
+  endpoints {
+    s3     = var.endpoint   # http://localhost:4566
+    sqs    = var.endpoint
+    lambda = var.endpoint
+    iam    = var.endpoint
+    sts    = var.endpoint
+    logs   = var.endpoint
+  }
+}
+  </code></pre>
+  <aside class="notes">
+    Walk through it: fake keys, skip the checks that would call real AWS, and send every service to localhost.
+    The rest of main.tf is plain AWS Terraform. Nothing Floci-specific.
+  </aside>
+</section>
+
+<section id="tf-s3-sqs" class="code-tall">
+  <h3>S3 tells SQS about every new file</h3>
+  <pre><code class="language-ini" data-trim data-line-numbers="1-16|1-3|5-7|9-16|10,13">
+resource "aws_s3_bucket" "uploads" {
+  bucket = "uploads"
+}
+
+resource "aws_sqs_queue" "events" {
+  name = "uploads-events"
+}
+
+resource "aws_s3_bucket_notification" "to_queue" {
+  bucket = aws_s3_bucket.uploads.id
+
+  queue {
+    queue_arn = aws_sqs_queue.events.arn
+    events    = ["s3:ObjectCreated:*"]
+  }
+}
+  </code></pre>
+  <p class="small">References like <code>aws_sqs_queue.events.arn</code> are the arrows: Terraform creates things in that order.</p>
+  <aside class="notes">
+    Last step highlights lines 10 and 13: the notification references the bucket and the queue. That reference is the arrow in the diagram.
+    In main.tf the notification also has depends_on = [aws_sqs_queue_policy.allow_s3]. The queue policy (not shown) allows s3.amazonaws.com to send to the queue. Real AWS rejects the notification without it;
+    Floci 2.5.0 accepts it, which is one of the gaps on the limits slide at the end.
+  </aside>
+</section>
+
+<section id="tf-sqs-lambda" class="code-tall">
+  <h3>SQS triggers the Lambda</h3>
+  <pre><code class="language-ini" data-trim data-line-numbers="1-15|1-8|3|11-15|12-13">
+resource "aws_lambda_function" "process_upload" {
+  function_name = "process-upload"
+  role          = aws_iam_role.lambda.arn
+  runtime       = "python3.12"
+  handler       = "handler.handler"
+  filename      = data.archive_file.lambda.output_path
+  timeout       = 10
+}
+
+# Poll the queue and call the function for every message
+resource "aws_lambda_event_source_mapping" "from_queue" {
+  event_source_arn = aws_sqs_queue.events.arn
+  function_name    = aws_lambda_function.process_upload.arn
+  batch_size       = 1
+}
+  </code></pre>
+  <p class="small">Simplified for the slide. The full file also zips <code>src/handler.py</code> and defines the IAM role.</p>
+  <aside class="notes">
+    Line 3: the function runs as the IAM role, which only allows reading this queue and writing logs.
+    Lines 12-13: the event source mapping is the "trigger" arrow. Floci runs the function in a real
+    python3.12 Lambda container, which is why Lab 0 needs Docker.
+  </aside>
+</section>
+
+<section id="tf-handler">
+  <h3>The code the Lambda runs: <code>src/handler.py</code></h3>
+  <pre><code class="language-python" data-trim data-line-numbers="1-12|4-5|6-10|10">
+import json
+
+def handler(event, context):
+    for record in event["Records"]:           # one SQS message
+        body = json.loads(record["body"])     # the S3 event inside it
+        for s3_event in body.get("Records", []):
+            bucket = s3_event["s3"]["bucket"]["name"]
+            key = s3_event["s3"]["object"]["key"]
+            size = s3_event["s3"]["object"].get("size", 0)
+            print(f"PROCESSED s3://{bucket}/{key} ({size} bytes)")
+    return {"ok": True}
+  </code></pre>
+  <p class="small">That <code>PROCESSED</code> line lands in CloudWatch Logs. <code>verify.sh</code> waits for it.</p>
+  <aside class="notes">
+    An S3 event wrapped inside an SQS message: the handler unwraps two layers.
+    Remember line 5 (record["body"], lowercase). Lab 3 breaks it, and the agent has to find it in the logs.
+    Don't say that out loud yet.
+  </aside>
+</section>
+
+<section>
+  <h3>Apply it</h3>
+  <pre><code class="language-bash" data-trim>
+cd lab2-terraform
+terraform init
+time terraform apply -auto-approve
+  </code></pre>
+  <p class="fragment">8 resources: bucket, queue, queue policy, S3 → SQS notification, IAM role + policy, Lambda, event source mapping</p>
+  <aside class="notes">
+    About a minute on Floci. Most of that is the Terraform AWS provider deliberately waiting ~25 s on the SQS
+    queue and ~25 s on the queue policy for attributes to propagate. It waits the same way against real AWS.
+    The CLI creates the same queue instantly. Ask: who finished first? How long did it take?
+  </aside>
+</section>
+
+<section class="checkpoint">
+  <p class="badge">✅ Checkpoint</p>
+  <pre><code class="language-bash" data-trim>
+$ ./verify.sh
+Uploaded s3://uploads/verify-1730000000.txt, waiting for the Lambda...
+... PROCESSED s3://uploads/verify-1730000000.txt (54 bytes)
+✅ Pipeline works
+  </code></pre>
+  <p class="small">By hand: <code>aws s3 cp hello.txt s3://uploads/</code> then <code>aws logs tail /aws/lambda/process-upload --follow</code></p>
+  <aside class="notes">The first invocation pulls/starts the Python Lambda container. A few seconds is normal.</aside>
+</section>
+
+<!-- ============================ LAB 3 (50-70) ============================ -->
+
+<section class="lab-title" data-background-color="#1F0D16">
+  <p class="clock">50 – 70 min</p>
+  <h1>Lab 3</h1>
+  <h2>Let the agent break it</h2>
+  <p class="chapter-line">Chapter 4 · <b>Round two with the agent</b></p>
+  <p class="beat">Thursday night, 1:40 AM again. Same agent, same prompt. This time the keys are <code>test</code> / <code>test</code>.</p>
+</section>
+
+<section>
+  <h3>Same pipeline. Bugs included.</h3>
+  <pre><code class="language-bash" data-trim>
+cd ../lab2-terraform && terraform destroy -auto-approve   # free the names
+cd ../lab3-agent                                         # open your agent here
+  </code></pre>
+  <blockquote class="prompt">
+    Deploy it against the local AWS emulator at http://localhost:4566 …
+    then run ./verify.sh. If anything fails, read the error, fix the code,
+    and try again until it prints "Pipeline works".
+    <b>Never use real AWS credentials.</b>
+  </blockquote>
+  <p class="small">Full prompt: <code>lab3-agent/PROMPT.md</code></p>
+  <aside class="notes">
+    Two seeded bugs, don't reveal them:
+    (1) the S3 notification has a hard-coded queue ARN with a typo (upload-events vs uploads-events), so
+    apply fails with "InvalidArgument: Unable to validate the following destination configurations";
+    (2) the handler reads record["Body"] instead of record["body"], so apply succeeds but the Lambda logs a
+    KeyError and verify.sh fails. The agent has to go read the logs. That second one is the teaching moment.
+    After the fix, the old failed message gets retried and processed too.
+  </aside>
+</section>
+
+<section>
+  <h3>Watch for the loop</h3>
+  <ol class="big-list steps">
+    <li class="fragment">The agent applies, and something <b>fails</b></li>
+    <li class="fragment">It reads the <b>real</b> error message</li>
+    <li class="fragment">It edits the code and applies <b>again</b></li>
+    <li class="fragment">It <b>verifies its own work</b> with <code>./verify.sh</code></li>
+  </ol>
+  <p class="fragment small">No agent? Do it by hand: apply, read the error, fix it, repeat. Or pair with a neighbor.</p>
+  <aside class="notes">Run it live on the projector with your own agent at the same time. Backup video if Wi-Fi dies.</aside>
+</section>
+
+<section class="checkpoint">
+  <p class="badge">✅ Checkpoint</p>
+  <pre><code class="language-bash" data-trim>
+$ ./verify.sh
+✅ Pipeline works
+  </code></pre>
+  <div class="fragment callout">
+    <p><b>Now:</b> “Destroy everything and rebuild it from scratch, then verify.”</p>
+    <p class="small">How many attempts across the room? Alex's first night: 12 attempts, 116 minutes, $187.60.</p>
+  </div>
+  <aside class="notes">Collect attempt counts by show of hands: 1, 2-3, 4+. Ask what the agent got wrong first.</aside>
+</section>
+
+<!-- ============================ LAB 4 (70-80) ============================ -->
+
+<section class="lab-title" data-background-color="#0F1520">
+  <p class="clock">70 – 80 min</p>
+  <h1>Lab 4</h1>
+  <h2>Reset and run in parallel</h2>
+  <p class="chapter-line">Chapter 5 · <b>The undo button, and teammates</b></p>
+  <p class="beat">Friday morning. Alex's teammates want to try their own agents on the same laptop.</p>
+</section>
+
+<section>
+  <h3>Part A · Reset</h3>
+  <pre><code class="language-bash" data-trim data-line-numbers="1-2|4-6">
+floci aws reset -y           # wipe every resource, keep Floci running
+aws s3 ls                    # everything is gone
+
+rm -f terraform.tfstate*
+time terraform apply -auto-approve
+./verify.sh
+  </code></pre>
+  <p class="fragment">The reset takes <b>about a second</b>. Clean slate every time, no container restart.</p>
+  <p class="fragment small">Alex's $187.60 bill came from leftovers. Here, leftovers last until the next reset.</p>
+  <aside class="notes">
+    floci aws reset took 0.4 s with nothing deployed and 1.5 s with the Lab 3 Lambda running (floci-cli 0.4.0, Floci 2.5.0). It deletes every resource and keeps the container up.
+    A full container restart also wipes state: floci aws restart. Show startup time with: floci aws logs | grep "started in". On 2.5.0 no internal awslambda-... bucket shows up after the reset.
+  </aside>
+</section>
+
+<section>
+  <h3>Part B · Isolated accounts on one Floci</h3>
+  <div class="two-col terminals">
+    <div>
+      <p class="term-label">Terminal A · Alex's agent</p>
+      <pre><code class="language-bash" data-trim>
+export AWS_ACCESS_KEY_ID=111111111111
+aws s3 mb s3://same-name
+aws s3 ls
+      </code></pre>
+    </div>
+    <div>
+      <p class="term-label">Terminal B · Jordan's agent</p>
+      <pre><code class="language-bash" data-trim>
+export AWS_ACCESS_KEY_ID=222222222222
+aws s3 mb s3://same-name   # no collision
+aws s3 ls
+      </code></pre>
+    </div>
+  </div>
+  <p class="fragment">A 12-digit access key <b>becomes the account ID</b>. Several agents or CI jobs, one emulator, no collisions.</p>
+  <p class="small">Or run <code>lab4-reset/accounts.sh</code></p>
+  <aside class="notes">Checkpoint: each terminal lists only its own bucket, and sts get-caller-identity shows a different account.</aside>
+</section>
+
+<!-- ============================ WRAP-UP (80-90) ============================ -->
+
+<section id="limits">
+  <p class="chapter"><time>Friday</time> before the demo</p>
+  <h2>What an emulator <span class="accent">can't</span> tell you</h2>
+  <div class="two-col">
+    <div>
+      <p class="col-head">Accepted by Floci 2.5.0, rejected by AWS</p>
+      <ul class="small-list">
+        <li class="fragment">S3 → SQS notification when the queue policy doesn't let S3 send</li>
+        <li class="fragment">Event source mapping with queue visibility timeout &lt; function timeout</li>
+        <li class="fragment">Lambda function with an IAM role that doesn't exist</li>
+      </ul>
+    </div>
+    <div>
+      <p class="col-head">Hard to emulate at all</p>
+      <ul class="small-list">
+        <li>IAM policy evaluation edge cases</li>
+        <li>Service quotas and limits</li>
+        <li>Real latency, throttling, eventual consistency</li>
+        <li>Newer or less common features</li>
+      </ul>
+    </div>
+  </div>
+  <p class="fragment punch">Pass locally, then validate in a real sandbox account before production.</p>
+  <aside class="notes">
+    All three on the left were re-tested on Floci 2.5.0 (2026-11-16) and are still accepted. Contrast: Floci does reject a notification to a queue
+    that doesn't exist (Lab 3's first bug) and an EKS cluster with a subnet that doesn't exist.
+    An agent that passes locally and breaks prod is worse than one that never ran.
+    Story beat: Alex's professor asks, "Will it work on real AWS?" This slide is Alex's honest answer.
+    One more gap found while timing Lab 2 (Floci 2.5.0): Floci lets you re-create an SQS queue with the same name right
+    after deleting it; AWS makes you wait 60 s (QueueDeletedRecently).
+  </aside>
+</section>
+
+<section id="time">
+  <h2>Time spent waiting</h2>
+  <table class="time-table">
+    <thead><tr><th>Resource</th><th>Real cloud (typical)</th><th>Floci</th></tr></thead>
+    <tbody>
+      <tr><td>EKS cluster</td><td>~9–15 min create, ~8 min destroy</td><td class="win">~12 s create, ~1 s delete</td></tr>
+      <tr><td>RDS PostgreSQL</td><td>~5–15 min</td><td class="win">~3 s</td></tr>
+      <tr><td>VPC</td><td>seconds (NAT gateway: minutes)</td><td class="win">&lt; 1 s</td></tr>
+      <tr><td>Lab 2: wipe and rebuild <span class="est">(one agent loop)</span></td><td>~3 min* <span class="est">(estimate)</span></td><td class="win">~1 min*</td></tr>
+      <tr><td>Emulator startup</td><td>n/a</td><td class="win">tens of ms</td></tr>
+    </tbody>
+  </table>
+  <div class="total-hero">
+    <div class="side aws"><span class="big">~25–40 min</span><span class="who">Real AWS</span></div>
+    <span class="vs">vs</span>
+    <div class="side floci"><span class="big">~75 s</span><span class="who">Floci</span></div>
+  </div>
+  <p class="total-cap">Every row above, one after another. The agent pays it again on every attempt.</p>
+  <p class="footnote">Floci 2.5.0 on a laptop, images already pulled. *AWS: <code>terraform destroy</code> (≥45 s) + 60 s before SQS lets you reuse the queue name + <code>apply</code>. Floci: <code>floci aws reset</code> (~1 s) + <code>apply</code> (57 s, mostly Terraform's own waits).</p>
+  <aside class="notes">
+    Real-cloud sources (verify before presenting): AWS EKS announcement (control plane in about 9 minutes on average),
+    a Terraform timing benchmark (EKS 11m19s create, 8m18s destroy, 30+ min round trip), RDS provider docs
+    (5 to 7 min for MySQL/PostgreSQL, longer for SQL Server).
+    Floci times re-measured on 2.5.0 (2026-11-16), polling every 0.5 s: EKS create → ACTIVE 11–14 s (was 7–9 s on 2.4.0),
+    delete ~1.1 s; RDS PostgreSQL create → available 2–3 s; create-vpc 0.46 s (a plain AWS CLI call is ~0.4 s);
+    Lab 2 apply 62 s; server start ~55 ms on restart (150–550 ms on a first start).
+    Don't use "aws eks wait cluster-active" to demo this: it polls every 30 s and makes Floci look like 31 s.
+    Lab 2 row is the loop the agent runs in Lab 3 ("destroy everything and rebuild"), not a single first apply.
+    A single apply is ~1 min on both, because Terraform AWS provider v5.100.0 itself waits: it re-reads a new SQS queue
+    and queue policy 6 times, 5 s apart (sqs/queue.go). The loop is where AWS loses time:
+    destroy waits for the deleted queue to read as gone 15 times, 3 s apart (>=45 s, waitQueueDeleted);
+    AWS then refuses a queue with the same name for 60 s (QueueDeletedRecently, documented on DeleteQueue);
+    then the apply again (~1-1.5 min with IAM propagation retries). About 3 min, estimated, not measured.
+    Floci measured on 2.5.0: floci aws reset 0.4 s + apply 57 s. Over the 12 attempts of Alex's night: ~36 min vs ~12 min.
+    To replace the estimate, time one destroy + apply in a real sandbox account.
+    Total row: EKS create + destroy (9-15 min + ~8 min) + RDS (5-15 min) + VPC (seconds) + Lab 2 loop (~3 min) = ~25-40 min.
+    Floci: 12 s + 1 s + 3 s + <1 s + 57 s + 0.4 s reset = ~75 s. Startup left out (tens of ms, no AWS equivalent).
+    Line to say: "Half an hour on AWS, about a minute on Floci. And the agent does it again on every attempt."
+  </aside>
+</section>
+
+<section id="epilogue" class="story">
+  <p class="chapter"><time>Friday</time> demo day</p>
+  <h2>Alex's week, two ways</h2>
+  <table class="scorecard">
+    <thead><tr><th></th><th>Monday night<br><span>real keys</span></th><th>Thursday night<br><span>Floci</span></th></tr></thead>
+    <tbody>
+      <tr><td>Agent attempts</td><td class="bad">12</td><td class="win">as many as it wanted</td></tr>
+      <tr><td>Waiting</td><td class="bad">10:30 PM to 4:09 AM</td><td class="win">seconds per try</td></tr>
+      <tr><td>Blast radius</td><td class="bad">a real AWS account</td><td class="win">a container</td></tr>
+      <tr><td>Cleanup</td><td class="bad">forgot, kept billing</td><td class="win"><code>floci aws reset</code></td></tr>
+      <tr><td>Bill</td><td class="bad">$187.60</td><td class="win">$0</td></tr>
+    </tbody>
+  </table>
+  <p class="fragment beat">Alex demos on time, then runs it once in a real sandbox account. It works.</p>
+  <p class="fragment punch">Next time, you're Alex. Which week do you want?</p>
+  <aside class="notes">
+    Close the story here. Ask the room for their own Lab 3 attempt counts and drop them into the Thursday column out loud.
+    "Runs it once in a real sandbox" is the rule from the limits slide: pass locally, then validate for real.
+  </aside>
+</section>
+
+<section id="benefits">
+  <h2>Why a local cloud</h2>
+  <div class="grid">
+    <div><b>Cost</b><span>zero spend for dev, tests, demos, agents</span></div>
+    <div><b>Speed</b><span>tight loop for humans and agents</span></div>
+    <div><b>Safety</b><span>no credentials, no blast radius</span></div>
+    <div><b>Clean state</b><span>every run starts from zero</span></div>
+    <div><b>Offline</b><span>plane, classroom, firewall</span></div>
+    <div><b>CI friendly</b><span>fast start, small footprint</span></div>
+    <div><b>Parallelism</b><span>isolated accounts and instances</span></div>
+    <div><b>Multi-cloud</b><span>AWS, Azure, GCP, OCI</span></div>
+    <div><b>Learning</b><span>real workflows, no credit card</span></div>
+    <div><b>Open source</b><span>MIT, no account, no limits</span></div>
+  </div>
+</section>
+
+<section id="keep-going">
+  <h2>Keep going</h2>
+  <div class="qr-row">
+    <figure>
+      <div class="qr" data-qr="workshop"></div>
+      <figcaption>Workshop repo<br><span data-qr-label="workshop"></span></figcaption>
+    </figure>
+    <figure>
+      <div class="qr" data-qr="floci"></div>
+      <figcaption>Floci<br><span data-qr-label="floci"></span></figcaption>
+    </figure>
+    <figure>
+      <div class="qr" data-qr="github"></div>
+      <figcaption>Hector on GitHub<br><span data-qr-label="github"></span></figcaption>
+    </figure>
+  </div>
+  <p class="small">hectorvent.dev</p>
+</section>
+
+<!-- ============================ Q&A (90-120) ============================ -->
+
+<section id="qa">
+  <h1>Questions?</h1>
+  <p>Keep hacking on the labs while we talk.</p>
+  <aside class="notes">
+    Seed questions if the room is quiet:
+    How is this different from LocalStack?
+    Can I use this for my class project or capstone?
+    How do I know when to stop testing locally and use a real account?
+    How did you build a cloud emulator? Why Java?
+    How do I start contributing to open source?
+  </aside>
+</section>
+
+</div>
+</div>
+
+<script src="vendor/reveal.js/dist/reveal.js"></script>
+<script src="vendor/reveal.js/plugin/notes/notes.js"></script>
+<script src="vendor/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="vendor/qrcode.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>

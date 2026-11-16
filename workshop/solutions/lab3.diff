@@ -1,0 +1,22 @@
+--- a/main.tf	2026-10-25 22:00:20
++++ b/main.tf	2026-10-25 21:58:08
+@@ -67,7 +67,7 @@
+   bucket = aws_s3_bucket.uploads.id
+ 
+   queue {
+-    queue_arn = "arn:aws:sqs:us-east-1:000000000000:upload-events"
++    queue_arn = aws_sqs_queue.events.arn
+     events    = ["s3:ObjectCreated:*"]
+   }
+ 
+--- a/src/handler.py	2026-10-25 22:00:20
++++ b/src/handler.py	2026-10-25 21:58:08
+@@ -3,7 +3,7 @@
+ 
+ def handler(event, context):
+     for record in event["Records"]:
+-        body = json.loads(record["Body"])
++        body = json.loads(record["body"])
+         for s3_event in body.get("Records", []):
+             bucket = s3_event["s3"]["bucket"]["name"]
+             key = s3_event["s3"]["object"]["key"]
